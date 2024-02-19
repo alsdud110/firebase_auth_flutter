@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "981083833857",
+    "project_id": "firstfirebase-ddd8a",
+    "storage_bucket": "firstfirebase-ddd8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981083833857:android:087adc9a4d754cacce6200",
+        "android_client_info": {
+          "package_name": "com.example.firebase_post"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdNhcQDrxP92JaFaoZDfVOHwSG-Cms7KQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
