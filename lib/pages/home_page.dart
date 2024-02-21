@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
         "UserEmail": currentUser,
         "Message": textController.text,
         "Timestamp": Timestamp.now(),
+        "Likes": [],
       });
     }
 
@@ -64,6 +65,10 @@ class _HomePageState extends State<HomePage> {
                           currentUser: post["UserEmail"],
                           text: post["Message"],
                           date: post["Timestamp"],
+                          postId: post.id,
+                          likes: List<String>.from(
+                            post["Likes"] ?? [],
+                          ),
                         );
                       },
                     );
