@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_post/components/button.dart';
 import 'package:firebase_post/components/text_field.dart';
@@ -31,9 +32,21 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailTextController.text,
-          password: passwordTextController.text);
+      // FirebaseAuth 에 이메일, 패스워드 저장 후 userCrendial 에 담아둔다.
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: emailTextController.text,
+              password: passwordTextController.text);
+
+      // FirebaseFirestore 에 Users 라는 테이블에 키값이 userCrential.user.email 에 해당하는 username, bio 를 저장한다.
+      FirebaseFirestore.instance
+          .collection("Users")
+          .doc(userCredential.user!.email)
+          .set({
+        "username": emailTextController.text.split("@")[0],
+        "bio": "자기소개 하기",
+      });
+
       if (context.mounted) Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);

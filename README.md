@@ -102,3 +102,13 @@
         DateTime dateTime = (Timestamp)date.toDate();
     - DateTime -> String :
         String dateString = DateFormat("YYYY/MM/dd HH:MM").format(dateTime);
+
+10. 회원가입 또는 인증 처리 후 바로 뭔가 작업을 하고 싶을 경우
+    - UserCredential userCrendial = await FirebaseAuth.instance.createUser(...);
+    - 그럼 userCrential에 user정보다 담겨있다. (userCredential.user1.email)
+
+11. Edit을 하고 싶을 경우
+    - TextField 에서 onChange: (value) {
+        newValue = value;
+    }
+    - 맨 마지막에 await FirebaseFirestore.instance.collection("테이블명").doc("테이블키값").update({변경컬럼:변경값});
