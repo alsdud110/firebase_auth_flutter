@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_post/components/drawer.dart';
 import 'package:firebase_post/components/text_field.dart';
 import 'package:firebase_post/pages/post.dart';
+import 'package:firebase_post/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,20 +33,30 @@ class _HomePageState extends State<HomePage> {
     textController.clear();
   }
 
+  void goToProfilePage() {
+    Navigator.pop(context);
+
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const ProfilePage()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
+      drawer: MyDrawer(
+        onProfileTap: goToProfilePage,
+        onLogoutTap: signOut,
+      ),
       appBar: AppBar(
         backgroundColor: Colors.grey[900],
         foregroundColor: Colors.grey[100],
-        title: const Text("Firebase Post"),
-        actions: [
-          IconButton(
-            onPressed: signOut,
-            icon: const Icon(Icons.logout),
+        title: const Text(
+          "P O S T",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
           ),
-        ],
+        ),
       ),
       body: Center(
         child: Column(
