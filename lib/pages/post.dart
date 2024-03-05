@@ -106,6 +106,39 @@ class _PostState extends State<Post> {
     );
   }
 
+  void deletePostDialog(String postId) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          title: const Text("Delete Post"),
+          content: const Text("정말로 삭제하시겠습니까?"),
+          actions: [
+            GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: const Text("Cancel"),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            GestureDetector(
+              onTap: () {
+                deletePost(postId);
+                Navigator.pop(context);
+              },
+              child: const Text("Delete"),
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  void deletePost(String postId) {
+    FirebaseFirestore.instance.collection("User Posts").doc(postId).delete();
+  }
+
   @override
   Widget build(BuildContext context) {
     final dateTime = widget.date.toDate();
@@ -120,7 +153,22 @@ class _PostState extends State<Post> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.text),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(widget.text),
+              currentUser.email == widget.currentUser
+                  ? GestureDetector(
+                      onTap: () {
+                        deletePostDialog(widget.postId);
+                      },
+                      child: const Icon(
+                        Icons.delete_forever_rounded,
+                      ),
+                    )
+                  : const SizedBox()
+            ],
+          ),
           const SizedBox(
             height: 16,
           ),
@@ -132,9 +180,6 @@ class _PostState extends State<Post> {
                 style: TextStyle(
                   color: Colors.grey[500],
                 ),
-              ),
-              const SizedBox(
-                height: 10,
               ),
               Text(
                 DateFormat("MM/dd HH:MM").format(dateTime),
