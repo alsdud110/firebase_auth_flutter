@@ -19,19 +19,14 @@ class _ProfilePageState extends State<ProfilePage> {
     await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey[900],
+        backgroundColor: Theme.of(context).colorScheme.background,
         title: Text(
           "Edit $field",
-          style: const TextStyle(
-            color: Colors.white,
-          ),
         ),
         content: TextField(
           autofocus: true,
-          style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
             hintText: "Enter New $field",
-            hintStyle: const TextStyle(color: Colors.grey),
           ),
           // TextField 에 글이 채워질 때마다 newValue에 값을 넣어둔다.
           onChanged: (value) {
@@ -39,23 +34,22 @@ class _ProfilePageState extends State<ProfilePage> {
           },
         ),
         actions: [
-          TextButton(
-            child: const Text(
-              "Cancel",
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () {
+          GestureDetector(
+            onTap: () {
               newValue = "";
               Navigator.pop(context);
             },
+            child: const Text("Cancel"),
           ),
-          TextButton(
-            child: const Text(
-              "Save",
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () => Navigator.pop(context),
+          const SizedBox(
+            width: 10,
           ),
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Text("Save"),
+          )
         ],
       ),
     );
@@ -71,14 +65,12 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text(
           "P R O F I L E",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.grey[900],
-        foregroundColor: Colors.grey[100],
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance

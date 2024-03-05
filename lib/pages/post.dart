@@ -4,6 +4,7 @@ import 'package:firebase_post/components/comment.dart';
 import 'package:firebase_post/components/comment_button.dart';
 import 'package:firebase_post/components/like_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 class Post extends StatefulWidget {
@@ -74,41 +75,32 @@ class _PostState extends State<Post> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey[900],
+        backgroundColor: Theme.of(context).colorScheme.background,
         title: const Text(
           "Add Comment",
-          style: TextStyle(
-            color: Colors.white,
-          ),
         ),
         content: TextField(
+          autofocus: true,
           controller: _editingTextController,
-          style: const TextStyle(color: Colors.white),
           decoration: const InputDecoration(
             hintText: "Add a Comment",
-            hintStyle: TextStyle(color: Colors.white),
           ),
         ),
         actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text(
-              "Cancel",
-              style: TextStyle(color: Colors.white),
-            ),
+          GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: const Text("Cancel"),
           ),
-          TextButton(
-            onPressed: () {
+          const SizedBox(
+            width: 10,
+          ),
+          GestureDetector(
+            onTap: () {
               addComment(_editingTextController.text);
               Navigator.pop(context);
             },
-            child: const Text(
-              "Save",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
+            child: const Text("Save"),
+          )
         ],
       ),
     );
@@ -120,7 +112,7 @@ class _PostState extends State<Post> {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.circular(8),
       ),
       margin: const EdgeInsets.only(top: 25, left: 25, right: 25),

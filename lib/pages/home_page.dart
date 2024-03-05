@@ -43,14 +43,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Theme.of(context).colorScheme.background,
       drawer: MyDrawer(
         onProfileTap: goToProfilePage,
         onLogoutTap: signOut,
       ),
       appBar: AppBar(
-        backgroundColor: Colors.grey[900],
-        foregroundColor: Colors.grey[100],
         title: const Text(
           "P O S T",
           style: TextStyle(

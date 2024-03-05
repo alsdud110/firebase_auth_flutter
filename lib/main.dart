@@ -1,5 +1,7 @@
 import 'package:firebase_post/auth/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_post/theme/dark_theme.dart';
+import 'package:firebase_post/theme/ligth_theme.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 
@@ -20,10 +22,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: lightTheme,
+      darkTheme: darkTheme,
       home: const AuthPage(),
     );
   }
